@@ -8,12 +8,23 @@ on:
 jobs:
   keepalive:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Ping gpt2api Render
+        env:
+          TARGET_URL: ${{ secrets.TARGET_URL }}
+          TIMEOUT_SECONDS: "25"
+        run: |
+          if [ -z "${TARGET_URL}" ]; then
+            TARGET_URL="https://gpt2api-bridge.onrender.com/healthz"
+          fi
+          bash scripts/ping-gpt2api.sh
 
       - name: Keep repo alive
         run: bash scripts/keepalive.sh
