@@ -16,3 +16,8 @@ Standalone GitHub keepalive project (10-minute interval).
 In repo Settings -> Actions -> General:
 - Actions enabled
 - Workflow permissions set to `Read and write permissions`
+
+## GPT2API Render Ping
+- Additional workflow: `.github/workflows/gpt2api-render-ping.yml`
+- Pings Render every 5 minutes to reduce free-plan idle spin-down.
+- Optional secret: `TARGET_URL` (defaults to `https://gpt2api-bridge.onrender.com/healthz`)
