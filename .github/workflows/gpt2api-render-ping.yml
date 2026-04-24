@@ -2,8 +2,9 @@ name: GPT2API Render Ping
 
 on:
   schedule:
-    # 5 minutes is safer than 10 minutes due Actions queue jitter
-    - cron: "*/5 * * * *"
+    # Offset from the repo-heartbeat workflow so we still get a ping roughly
+    # every 5 minutes without piling onto top-of-hour scheduler spikes.
+    - cron: "8,18,28,38,48,58 * * * *"
   workflow_dispatch:
 
 jobs:
